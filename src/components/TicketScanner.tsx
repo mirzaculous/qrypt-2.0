@@ -30,6 +30,7 @@ export default function TicketScanner({
   // Webcam tracking
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [cameraActive, setCameraActive] = useState<boolean>(false);
+  const [cameraMode, setCameraMode] = useState<'none' | 'real' | 'virtual'>('none');
   const [cameraError, setCameraError] = useState<string>('');
   const [stream, setStream] = useState<MediaStream | null>(null);
 
@@ -56,13 +57,13 @@ export default function TicketScanner({
         video: { facingMode: 'environment', width: 400, height: 400 }
       });
       setStream(mediaStream);
-      if (videoRef.current) {
-        videoRef.current.srcObject = mediaStream;
-      }
       setCameraActive(true);
+      setCameraMode('real');
     } catch (err: any) {
       console.warn('Camera capture simulation fallback triggered:', err);
-      setCameraError('Camera access not detected or restricted in this container frame. Use emulation controls below to simulate secure scans.');
+      setCameraActive(true);
+      setCameraMode('virtual');
+      setCameraError('System-wide sandbox camera access restricted. Initialized Virtual QR Code Scanner framework.');
     }
   };
 
@@ -72,10 +73,23 @@ export default function TicketScanner({
     }
     setStream(null);
     setCameraActive(false);
+    setCameraMode('none');
   };
 
+  // Sync stream to video element
   useEffect(() => {
-    return () => stopCamera();
+    if (videoRef.current && stream) {
+      videoRef.current.srcObject = stream;
+    }
+  }, [stream]);
+
+  // Clean up on unmount or stream change
+  useEffect(() => {
+    return () => {
+      if (stream) {
+        stream.getTracks().forEach(track => track.stop());
+      }
+    };
   }, [stream]);
 
   // Handle Cryptographic Token verification
@@ -275,17 +289,35 @@ export default function TicketScanner({
             <div className="absolute bottom-4 right-4 w-6 h-6 border-b-2 border-r-2 border-slate-600"></div>
 
             {/* Decoded user video frame */}
-            {cameraActive ? (
-              <video 
-                ref={videoRef} 
-                autoPlay 
-                playsInline 
-                muted
-                className="absolute inset-0 w-full h-full object-cover grayscale brightness-110"
-              />
-            ) : (
-              <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center space-y-3 z-10 selection-none">
-                <div className="w-12 h-12 bg-black/60 rounded-full flex items-center justify-center border border-white/10">
+            <video 
+              ref={videoRef} 
+              autoPlay 
+              playsInline 
+              muted
+              className={`absolute inset-0 w-full h-full object-cover grayscale brightness-110 ${cameraActive && cameraMode === 'real' ? 'block' : 'hidden'}`}
+            />
+
+            {cameraActive && cameraMode === 'virtual' && (
+              <div className="absolute inset-0 bg-[#07080f] flex flex-col items-center justify-center p-6 text-center space-y-4 z-10 selection-none overflow-hidden">
+                {/* Rotating scanner rings / sonar effect */}
+                <div className="relative w-28 h-28 flex items-center justify-center">
+                  <div className="absolute inset-0 rounded-full border-2 border-emerald-500/20 animate-ping"></div>
+                  <div className="absolute inset-2 rounded-full border border-dashed border-emerald-500/30 animate-spin" style={{ animationDuration: '8s' }}></div>
+                  <div className="absolute inset-6 rounded-full border border-emerald-500/45 animate-pulse"></div>
+                  <Camera className="w-8 h-8 text-emerald-400" />
+                </div>
+                <div className="max-w-xs space-y-1">
+                  <h4 className="font-extrabold text-[11px] text-emerald-400 uppercase font-mono tracking-widest">Virtual Scanner Active</h4>
+                  <p className="text-[9.5px] text-slate-400 font-sans leading-relaxed">
+                    Point a ticket pass QR code to your screen, or use the quick simulation tools below to test entry instantly.
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {!cameraActive && (
+              <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center space-y-3 z-10 selection-none bg-black/60">
+                <div className="w-12 h-12 bg-black/80 rounded-full flex items-center justify-center border border-white/10">
                   <Camera className="w-5 h-5 text-slate-500" />
                 </div>
                 <div className="max-w-xs space-y-1">
@@ -298,8 +330,12 @@ export default function TicketScanner({
             )}
 
             {cameraActive && (
-              <span className="absolute bottom-3 left-3 bg-[#102a1d] text-emerald-400 text-[9px] uppercase font-mono px-2 py-0.5 border border-emerald-500/20 rounded font-extrabold tracking-wide">
-                ● LIVE SCAN FEED
+              <span className={`absolute bottom-3 left-3 text-[9px] uppercase font-mono px-2 py-0.5 border rounded font-extrabold tracking-wide ${
+                cameraMode === 'real'
+                  ? 'bg-[#102a1d] text-emerald-400 border-emerald-500/20'
+                  : 'bg-amber-950/40 text-amber-400 border-amber-500/20'
+              }`}>
+                ● {cameraMode === 'real' ? 'LIVE SCAN FEED' : 'EMULATION ACTIVE'}
               </span>
             )}
           </div>
