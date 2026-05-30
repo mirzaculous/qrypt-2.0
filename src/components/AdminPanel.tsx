@@ -41,9 +41,9 @@ export default function AdminPanel({
     <div className="space-y-8 animate-fade-in pb-16 relative z-10 text-slate-200">
       
       {/* Title block */}
-      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-b border-white/5 pb-6">
+      <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-4 border-b border-emerald-500/10 pb-6">
         <div>
-          <span className="text-[10px] text-red-500 font-extrabold font-mono uppercase block tracking-wider">PLATFORM GATEKEEPING INTERFACE</span>
+          <span className="text-[10px] text-emerald-400 font-extrabold font-mono uppercase block tracking-wider">PLATFORM ADMINISTRATION</span>
           <h2 className="text-xl sm:text-2xl font-extrabold text-white font-display uppercase tracking-tight mt-0.5">
             System Admin Panel
           </h2>
@@ -66,7 +66,7 @@ export default function AdminPanel({
                 onClick={() => setActiveTab3(tab)}
                 className={`flex items-center gap-1.5 px-4 py-1.5 rounded-full text-xs font-semibold capitalize cursor-pointer transition-all uppercase tracking-wider ${
                   activeTab === tab
-                    ? 'bg-blue-600 text-white font-bold shadow-lg'
+                    ? 'bg-emerald-600 text-white font-bold shadow-lg'
                     : 'text-slate-400 hover:text-white'
                 }`}
               >
@@ -85,8 +85,8 @@ export default function AdminPanel({
       {/* Admin Quick Metrics stats cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
         
-        <div className="bg-[#0F111A] border p-5 rounded-3xl flex items-center gap-4 border-white/5 shadow-sm">
-          <div className="w-10 h-10 bg-blue-500/10 text-blue-400 border border-blue-500/15 rounded-xl flex items-center justify-center font-bold">
+        <div className="bg-[#0b0c0b] border p-5 rounded-3xl flex items-center gap-4 border-emerald-500/10 shadow-sm">
+          <div className="w-10 h-10 bg-emerald-500/10 text-emerald-405 border border-emerald-500/15 rounded-xl flex items-center justify-center font-bold">
             <Users className="w-5 h-5" />
           </div>
           <div>
@@ -95,7 +95,7 @@ export default function AdminPanel({
           </div>
         </div>
 
-        <div className="bg-[#0F111A] border p-5 rounded-3xl flex items-center gap-4 border-white/5 shadow-sm">
+        <div className="bg-[#0b0c0b] border p-5 rounded-3xl flex items-center gap-4 border-emerald-500/10 shadow-sm">
           <div className="w-10 h-10 bg-amber-500/10 text-amber-400 border border-amber-500/15 rounded-xl flex items-center justify-center font-bold">
             <Clock className="w-5 h-5" />
           </div>
@@ -105,7 +105,7 @@ export default function AdminPanel({
           </div>
         </div>
 
-        <div className="bg-[#0F111A] border p-5 rounded-3xl flex items-center gap-4 border-white/5 shadow-sm">
+        <div className="bg-[#0b0c0b] border p-5 rounded-3xl flex items-center gap-4 border-emerald-500/10 shadow-sm">
           <div className="w-10 h-10 bg-emerald-500/10 text-emerald-400 border border-emerald-500/15 rounded-xl flex items-center justify-center font-bold">
             <CheckSquare className="w-5 h-5" />
           </div>
@@ -115,14 +115,14 @@ export default function AdminPanel({
           </div>
         </div>
 
-        <div className="bg-[#0F111A] border p-5 rounded-3xl flex items-center gap-4 border-white/5 shadow-sm">
-          <div className="w-10 h-10 bg-rose-500/10 text-rose-450 border border-rose-500/15 rounded-xl flex items-center justify-center font-bold">
+        <div className="bg-[#0b0c0b] border p-5 rounded-3xl flex items-center gap-4 border-emerald-500/10 shadow-sm">
+          <div className="w-10 h-10 bg-emerald-500/10 text-emerald-440 border border-emerald-500/15 rounded-xl flex items-center justify-center font-bold">
             <AlertOctagon className="w-5 h-5" />
           </div>
           <div>
             <span className="text-[10px] text-slate-500 block font-mono font-bold uppercase tracking-wider">System Status</span>
-            <span className="text-[10px] font-bold text-emerald-400 uppercase flex items-center gap-1 mt-1 font-mono tracking-wider">
-              <span>● CRYPT SECURE</span>
+            <span className="text-[10px] font-bold text-emerald-405 uppercase flex items-center gap-1 mt-1 font-mono tracking-wider">
+              <span>● ACTIVE SERVICE</span>
             </span>
           </div>
         </div>
@@ -131,21 +131,21 @@ export default function AdminPanel({
 
       {/* VIEW: MODERATE EVENTS */}
       {activeTab === 'events' && (
-        <div className="bg-[#0F111A] border rounded-[32px] p-6 border-white/5 space-y-4 shadow-xl">
+        <div className="bg-[#0b0c0b] border rounded-[32px] p-6 border-emerald-500/10 space-y-4 shadow-xl">
           <div>
-            <h3 className="text-sm font-bold text-white uppercase font-display tracking-wider">Events Approval Pipeline</h3>
-            <p className="text-[10px] text-slate-500 font-mono mt-1">Review listing applications uploaded by organizers. Only verified and secure events populate public indexes.</p>
+            <h3 className="text-sm font-bold text-white uppercase font-display tracking-wider">Event Approvals</h3>
+            <p className="text-[10px] text-slate-400 font-sans mt-1">Review new event requests submitted by organizers. Approved events will immediately display in the marketplace.</p>
           </div>
 
           <div className="overflow-x-auto pt-2">
             <table className="w-full text-left text-xs border-collapse">
               <thead>
-                <tr className="bg-black/35 text-slate-450 font-mono text-[9px] uppercase border-b border-white/5">
+                <tr className="bg-black/35 text-slate-400 font-mono text-[9px] uppercase border-b border-white/5">
                   <th className="p-3">Banner & Title</th>
                   <th className="p-3">Geography (City)</th>
-                  <th className="p-3">Ticket Pricing tiers</th>
-                  <th className="p-3">Approval status</th>
-                  <th className="p-3 text-right">Gatekeeper Actions</th>
+                  <th className="p-3">Ticket Pricing Tiers</th>
+                  <th className="p-3">Approval Status</th>
+                  <th className="p-3 text-right">Actions</th>
                 </tr>
               </thead>
               <tbody>
@@ -183,12 +183,12 @@ export default function AdminPanel({
                       {!ev.isApproved ? (
                         <button
                           onClick={() => onApproveEvent(ev.id)}
-                          className="bg-blue-600 hover:bg-blue-500 text-white font-mono px-4 py-1.5 rounded-full text-[10px] font-bold cursor-pointer inline-flex items-center gap-1 uppercase tracking-wider transition-colors"
+                          className="bg-emerald-600 hover:bg-emerald-500 text-white font-mono px-4 py-1.5 rounded-full text-[10px] font-bold cursor-pointer inline-flex items-center gap-1 uppercase tracking-wider transition-colors"
                         >
                           <span>Approve Listing</span>
                         </button>
                       ) : (
-                        <span className="text-[10px] text-slate-500 font-mono uppercase tracking-wider">Approved by Admin</span>
+                        <span className="text-[10px] text-emerald-400 font-mono uppercase tracking-wider">Approved by Admin</span>
                       )}
                     </td>
                   </tr>
@@ -201,10 +201,10 @@ export default function AdminPanel({
 
       {/* VIEW: MODERATE ORGANIZERS */}
       {activeTab === 'organizers' && (
-        <div className="bg-[#0F111A] border rounded-[32px] p-6 border-white/5 space-y-4 shadow-xl">
+        <div className="bg-[#0b0c0b] border rounded-[32px] p-6 border-emerald-500/10 space-y-4 shadow-xl">
           <div>
-            <h3 className="text-sm font-bold text-white uppercase font-display tracking-wider">Curators Verification Pipeline</h3>
-            <p className="text-[10px] text-slate-500 font-mono mt-1">Conduct background CNIC & corporate ledger validation reviews on registering event organizations.</p>
+            <h3 className="text-sm font-bold text-white uppercase font-display tracking-wider">Organizer Verification</h3>
+            <p className="text-[10px] text-slate-400 font-sans mt-1">Review credentials of registering organization accounts to activate ticket-selling options.</p>
           </div>
 
           <div className="overflow-x-auto pt-2">
@@ -214,7 +214,7 @@ export default function AdminPanel({
                   <th className="p-3">Organization Name</th>
                   <th className="p-3">Geography (HQ city)</th>
                   <th className="p-3">Registered Revenue</th>
-                  <th className="p-3">Verification Badge status</th>
+                  <th className="p-3">Verification Status</th>
                   <th className="p-3 text-right">Actions</th>
                 </tr>
               </thead>
@@ -235,8 +235,8 @@ export default function AdminPanel({
                     <td className="p-3">
                       <span className={`px-2.5 py-0.5 rounded-full text-[9px] font-mono font-bold uppercase border ${
                         org.isVerified 
-                          ? 'bg-blue-500/10 text-blue-400 border-blue-500/15' 
-                          : 'bg-rose-500/10 text-rose-400 border-rose-500/15 animate-pulse'
+                          ? 'bg-emerald-555/10 text-emerald-400 border-emerald-500/15' 
+                          : 'bg-rose-500/10 text-rose-450 border-rose-500/15 animate-pulse'
                       }`}>
                         {org.isVerified ? 'VERIFIED' : 'PENDING REVIEW'}
                       </span>
@@ -245,12 +245,12 @@ export default function AdminPanel({
                       {!org.isVerified ? (
                         <button
                           onClick={() => onApproveOrganizer(org.id)}
-                          className="bg-blue-600 hover:bg-blue-500 text-white font-mono px-4 py-1.5 rounded-full text-[10px] font-bold cursor-pointer uppercase tracking-wider transition-colors"
+                          className="bg-emerald-600 hover:bg-emerald-500 text-white font-mono px-4 py-1.5 rounded-full text-[10px] font-bold cursor-pointer uppercase tracking-wider transition-colors"
                         >
-                          Authorize Curator
+                          Verify Organizer
                         </button>
                       ) : (
-                        <span className="text-[10px] text-slate-500 font-mono uppercase tracking-wider">Authorized</span>
+                        <span className="text-[10px] text-emerald-400 font-mono uppercase tracking-wider">Authorized</span>
                       )}
                     </td>
                   </tr>
@@ -263,10 +263,10 @@ export default function AdminPanel({
 
       {/* VIEW: PROCESSING PAYOUTS */}
       {activeTab === 'payouts' && (
-        <div className="bg-[#0F111A] border rounded-[32px] p-6 border-white/5 space-y-4 shadow-xl">
+        <div className="bg-[#0b0c0b] border rounded-[32px] p-6 border-emerald-500/10 space-y-4 shadow-xl">
           <div>
-            <h3 className="text-sm font-bold text-white uppercase font-display tracking-wider">Escrow Withdrawals & Payouts Portal</h3>
-            <p className="text-[10px] text-slate-500 font-mono mt-1">Release secure ticket sales funds compiled in platform safe vaults to organizers physical Pakistani bank accounts.</p>
+            <h3 className="text-sm font-bold text-white uppercase font-display tracking-wider">Disbursements & Payout Requests</h3>
+            <p className="text-[10px] text-slate-400 font-sans mt-1">Approve transfer requests to distribute ticket sales balance directly to active event organizers.</p>
           </div>
 
           {payouts.length === 0 ? (
@@ -306,9 +306,9 @@ export default function AdminPanel({
                               </button>
                               <button
                                 onClick={() => onProcessPayout(p.id, 'PROCESSED')}
-                                className="bg-white hover:bg-slate-100 text-[#07080F] font-mono px-4 py-1.5 rounded-full text-[9px] font-extrabold cursor-pointer uppercase tracking-wider transition-colors"
+                                className="bg-[#10b981] hover:bg-emerald-500 text-white font-mono px-4 py-1.5 rounded-full text-[9px] font-extrabold cursor-pointer uppercase tracking-wider transition-colors"
                               >
-                                Disburse PKR
+                                Approve Payout
                               </button>
                             </div>
                           ) : (
@@ -327,16 +327,16 @@ export default function AdminPanel({
 
       {/* VIEW: SECURITY CONTROL LOGS */}
       {activeTab === 'audits' && (
-        <div className="bg-[#0c0d15] text-slate-350 border border-white/10 rounded-[32px] p-6 shadow-2xl space-y-4">
+        <div className="bg-[#0b0c0b] text-slate-350 border border-emerald-500/10 rounded-[32px] p-6 shadow-2xl space-y-4">
           <div className="flex items-center justify-between border-b border-white/5 pb-3">
             <div>
               <h3 className="text-sm font-bold text-white uppercase font-mono flex items-center gap-1.5">
-                <Cpu className="w-4.5 h-4.5 text-blue-400" />
-                <span>Qrypt System-wide Audit Log</span>
+                <Cpu className="w-4.5 h-4.5 text-emerald-400" />
+                <span>Platform Action History Log</span>
               </h3>
-              <p className="text-[9px] text-slate-500 font-mono">Continuous cryptographic telemetry & transaction logs for OWASP compliance</p>
+              <p className="text-[9px] text-slate-500 font-mono">Historical activity records for monitoring listings and organizational actions.</p>
             </div>
-            <span className="text-[9px] bg-red-500/10 text-red-400 border border-white/5 px-2.5 py-1 rounded-full font-mono font-bold">128-bit Shell Safe</span>
+            <span className="text-[9px] bg-emerald-500/10 text-emerald-400 border border-emerald-500/15 px-2.5 py-1 rounded-full font-mono font-bold">Secure Logging Active</span>
           </div>
 
           <div className="space-y-2 max-h-96 overflow-y-auto font-mono text-[10px] pr-2 scrollbar-none">
@@ -344,7 +344,7 @@ export default function AdminPanel({
               <div key={log.id} className="bg-black/25 border border-white/5 p-3.5 rounded-xl flex flex-col sm:flex-row sm:items-start justify-between gap-3 text-left">
                 <div className="space-y-1">
                   <div className="flex items-center gap-2">
-                    <span className="text-blue-450 font-bold uppercase">[{log.action}]</span>
+                    <span className="text-emerald-450 font-bold uppercase">[{log.action}]</span>
                     <span className="text-slate-600">•</span>
                     <span className="text-slate-300">{log.userEmail}</span>
                   </div>

@@ -108,10 +108,10 @@ export default function UserDashboard({ purchasedPasses, events, ticketTiers, ve
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 border-b border-white/5 pb-6">
         <div>
           <h2 className="text-xl sm:text-2xl font-extrabold font-display uppercase tracking-tight text-white">
-            My Digital Qrypt Safe
+            My Tickets
           </h2>
-          <p className="text-xs text-slate-550 font-mono mt-0.5 uppercase tracking-wider">
-            Holding {activePasses.length} active event passes • Verified device binding standard
+          <p className="text-xs text-emerald-400 font-mono mt-0.5 uppercase tracking-wider">
+            You have {activePasses.length} active event tickets • Refreshing QR system active
           </p>
         </div>
         
@@ -120,7 +120,7 @@ export default function UserDashboard({ purchasedPasses, events, ticketTiers, ve
             onClick={() => setSelectedPass(null)}
             className="text-[10px] font-mono bg-white/5 hover:bg-white/10 text-slate-300 font-bold py-2.5 px-4 rounded-full cursor-pointer uppercase border border-white/5 tracking-wider transition-all"
           >
-            ← Close Scanner Presentation View
+            ← Back to Ticket List
           </button>
         )}
       </div>
@@ -140,12 +140,12 @@ export default function UserDashboard({ purchasedPasses, events, ticketTiers, ve
             {activePasses.length === 0 ? (
               <div className="py-14 text-center bg-white/[0.02] rounded-3xl border border-dashed border-white/10 flex flex-col items-center justify-center p-6 space-y-3">
                 <div className="w-12 h-12 bg-white/5 rounded-full flex items-center justify-center text-slate-400">
-                  <Ticket className="w-5 h-5 animate-pulse text-blue-400" />
+                  <Ticket className="w-5 h-5 animate-pulse text-emerald-400" />
                 </div>
                 <div className="max-w-md">
                   <h4 className="font-bold text-white font-display text-sm uppercase tracking-wider">No Active Tickets Found</h4>
                   <p className="text-xs text-slate-400 max-w-sm mt-1 leading-relaxed leading-[1.6]">
-                    Once you purchase a ticket in the Qrypt Marketplace, your dynamic cryptographic attendance passes will load right here!
+                    Once you purchase a ticket in the Marketplace, your secure QR code tickets will appear here!
                   </p>
                 </div>
               </div>
@@ -165,39 +165,39 @@ export default function UserDashboard({ purchasedPasses, events, ticketTiers, ve
                       onClick={() => setSelectedPass(pass)}
                       className={`group border rounded-[28px] p-5.5 flex flex-col justify-between cursor-pointer transition-all h-[210px] ${
                         isPresented
-                          ? 'bg-blue-600 border-blue-500 text-white shadow-xl scale-[1.015]'
-                          : 'bg-[#0F111A] hover:bg-[#131524] border-white/5 hover:border-white/15 shadow-sm'
+                          ? 'bg-[#102a1d] border-emerald-500 text-white shadow-xl scale-[1.015]'
+                          : 'bg-[#0d0f0d] hover:bg-[#121612] border-emerald-500/10 hover:border-emerald-500/25 shadow-sm'
                       }`}
                     >
                       <div className="space-y-1">
                         <div className="flex items-center justify-between text-[11px] font-mono font-medium">
-                          <span className={isPresented ? 'text-blue-100' : 'text-slate-500'}>
-                            CODE: #{pass.uniqueCode}
+                          <span className={isPresented ? 'text-emerald-350' : 'text-slate-500'}>
+                            TICKET CODE: #{pass.uniqueCode}
                           </span>
-                          <span className={`px-2.5 py-0.5 rounded-full text-[9px] font-bold tracking-widest uppercase ${isPresented ? 'bg-blue-500/30 text-white border border-white/10' : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'}`}>
+                          <span className={`px-2.5 py-0.5 rounded-full text-[9px] font-bold tracking-widest uppercase ${isPresented ? 'bg-emerald-500/30 text-emerald-100 border border-emerald-500/20' : 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'}`}>
                             ACTIVE
                           </span>
                         </div>
 
-                        <h4 className={`text-base font-extrabold font-display mt-2 group-hover:text-blue-400 leading-snug line-clamp-2 ${isPresented ? 'text-white group-hover:text-white' : 'text-white'}`}>
+                        <h4 className={`text-base font-extrabold font-display mt-2 group-hover:text-emerald-450 leading-snug line-clamp-2 ${isPresented ? 'text-white group-hover:text-white' : 'text-white'}`}>
                           {ev.title}
                         </h4>
                       </div>
 
                       <div className="space-y-2">
-                        <div className={`flex items-center gap-1 text-[11px] ${isPresented ? 'text-blue-100' : 'text-slate-400'}`}>
-                          <Calendar className="w-3.5 h-3.5 shrink-0 text-blue-400" />
+                        <div className={`flex items-center gap-1 text-[11px] ${isPresented ? 'text-emerald-250' : 'text-slate-400'}`}>
+                          <Calendar className="w-3.5 h-3.5 shrink-0 text-emerald-400" />
                           <span>{new Date(ev.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} • {ev.time} PST</span>
                         </div>
 
                         <div className="border-t border-dashed border-white/10 pt-3 flex items-center justify-between text-xs font-semibold">
                           <div>
-                            <span className={`block text-[9px] uppercase font-mono tracking-wider ${isPresented ? 'text-blue-200' : 'text-slate-500'}`}>TIER LEVEL</span>
+                            <span className={`block text-[9px] uppercase font-mono tracking-wider ${isPresented ? 'text-emerald-300' : 'text-slate-500'}`}>TIER LEVEL</span>
                             <span className="text-white">{tier?.name || 'Entry Pass'}</span>
                           </div>
 
                           <span className="text-[10px] uppercase font-mono tracking-widest underline decoration-2 underline-offset-2">
-                            {isPresented ? 'PRESENTING' : 'OPEN PASS'} 
+                            {isPresented ? 'SELECTED' : 'VIEW TICKET QR'} 
                           </span>
                         </div>
                       </div>
@@ -264,24 +264,15 @@ export default function UserDashboard({ purchasedPasses, events, ticketTiers, ve
             )}
           </div>
         </div>
-
-        {/* QR PRESENTER MODULE - spanned 2 columns */}
+                {/* QR PRESENTER MODULE - spanned 2 columns */}
         <div className="lg:col-span-2 space-y-4 sticky top-24">
           
           {selectedPass ? (
-            <div className="bg-[#0F111A] text-white rounded-[32px] p-6 border border-white/10 shadow-2xl relative overflow-hidden space-y-6 flex flex-col items-center">
+            <div className="bg-[#0b0c0b] text-white rounded-[32px] p-6 border border-emerald-500/10 shadow-2xl relative overflow-hidden space-y-6 flex flex-col items-center">
               
-              {/* Dynamic drifting secure watermark to block print screens */}
-              <div 
-                className="absolute text-[9px] font-black text-rose-500/15 pointer-events-none select-none uppercase tracking-widest font-mono"
-                style={{ left: `${watermarkPos.x}%`, top: `${watermarkPos.y}%` }}
-              >
-                NO SCREENSHOT VERIFICATION
-              </div>
-
               {/* Presenter Header */}
-              <div className="w-full border-b border-white/5 pb-4 text-center space-y-1">
-                <span className="text-[10px] font-mono font-extrabold text-[#45b6fe] uppercase tracking-widest block font-bold">SECURE ATTENDEE GATE PASS</span>
+              <div className="w-full border-b border-emerald-500/10 pb-4 text-center space-y-1">
+                <span className="text-[10px] font-mono font-extrabold text-emerald-400 uppercase tracking-widest block font-bold">VERIFIED TICKET ACCESS PASS</span>
                 <h4 className="font-extrabold text-white text-base leading-tight font-display font-semibold">
                   {getEventForPass(selectedPass)?.title}
                 </h4>
@@ -292,16 +283,16 @@ export default function UserDashboard({ purchasedPasses, events, ticketTiers, ve
               <div className="flex flex-col items-center justify-center space-y-2">
                 <div className="relative flex items-center justify-center">
                   {/* Outer circle layout countdown */}
-                  <div className="w-16 h-16 bg-black/40 border border-white/10 rounded-full flex flex-col items-center justify-center shadow-lg relative z-10">
-                    <span className="text-xl font-bold font-mono text-emerald-450">{rotatingSeconds}s</span>
-                    <span className="text-[8px] text-slate-500 font-mono uppercase font-bold tracking-widest">expiry</span>
+                  <div className="w-16 h-16 bg-black/40 border border-emerald-500/20 rounded-full flex flex-col items-center justify-center shadow-lg relative z-10">
+                    <span className="text-xl font-bold font-mono text-emerald-400">{rotatingSeconds}s</span>
+                    <span className="text-[8px] text-slate-550 font-mono uppercase font-bold tracking-widest">time left</span>
                   </div>
 
                   {/* Breathing neon light */}
-                  <div className="absolute w-20 h-20 bg-emerald-500/10 rounded-full animate-ping pointer-events-none"></div>
+                  <div className="absolute w-20 h-20 bg-emerald-505/10 rounded-full animate-ping pointer-events-none"></div>
                 </div>
-                <p className="text-[10px] text-slate-400 font-mono text-center">
-                  Generating dynamic secure JWT token.
+                <p className="text-[10px] text-slate-400 font-sans text-center">
+                  QR code regenerates for ticket security.
                 </p>
               </div>
 
@@ -314,57 +305,57 @@ export default function UserDashboard({ purchasedPasses, events, ticketTiers, ve
                     <QRCodeCanvas value={activeToken} />
                   </div>
 
-                  <div className="flex items-center gap-1.5 bg-red-500/10 border border-red-500/25 px-4 py-2.5 rounded-2xl max-w-xs text-center">
-                    <AlertTriangle className="w-4 h-4 text-red-400 shrink-0" />
-                    <span className="text-[9px] text-red-200 font-bold font-mono uppercase leading-relaxed tracking-tight">
-                      Automatic Expiry in 10s. Load QR Live on-screen.
+                  <div className="flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/20 px-4 py-2.5 rounded-2xl max-w-xs text-center">
+                    <Check className="w-4 h-4 text-emerald-400 shrink-0" />
+                    <span className="text-[9px] text-emerald-250 font-bold font-mono uppercase leading-relaxed tracking-tight">
+                      Rotates every 30 seconds. Show live QR for entry.
                     </span>
                   </div>
                 </div>
               )}
 
-              {/* Advanced Diagnostic Drawer */}
-              <div className="w-full bg-black/20 rounded-2xl p-4 border border-white/5 space-y-2.5 text-[10px] font-mono select-none">
+              {/* Secure Specifications Panel */}
+              <div className="w-full bg-black/40 rounded-2xl p-4 border border-emerald-500/10 space-y-2.5 text-[10px] font-mono select-none">
                 <div className="flex justify-between border-b border-white/5 pb-1 text-[9px] text-slate-500 font-bold uppercase tracking-wider">
-                  <span>Symmetric Cryptographic Logger</span>
-                  <span className="text-emerald-400 animate-pulse">● server index active</span>
+                  <span>Ticket Details</span>
+                  <span className="text-emerald-400">● Verified Active</span>
                 </div>
                 
                 {tokenPayload && (
-                  <div className="space-y-1 bg-black/40 p-2 text-slate-400 rounded-lg">
-                    <div className="line-clamp-1">Pass ID: <span className="text-white select-all">{tokenPayload.passId}</span></div>
-                    <div className="line-clamp-1">Signature: <span className="text-blue-400 font-bold">{tokenPayload.rotationIndex}x...{activeToken.split('.').pop()?.slice(0, 10)}</span></div>
-                    <div>Block active: <span className="text-yellow-400">{new Date(tokenPayload.timestamp * 1000).toLocaleTimeString()}</span></div>
-                    <div>Block expiry: <span className="text-rose-450">{new Date(tokenPayload.expiry * 1000).toLocaleTimeString()}</span></div>
+                  <div className="space-y-1 bg-black/50 p-2.5 text-slate-400 rounded-lg">
+                    <div className="line-clamp-1">Ticket ID: <span className="text-white select-all">{tokenPayload.passId}</span></div>
+                    <div className="line-clamp-1">Ref Code: <span className="text-emerald-400 font-semibold">#{selectedPass.uniqueCode}</span></div>
+                    <div>Created At: <span className="text-slate-300">{new Date(tokenPayload.timestamp * 1000).toLocaleTimeString()}</span></div>
+                    <div>Expires At: <span className="text-slate-300">{new Date(tokenPayload.expiry * 1000).toLocaleTimeString()}</span></div>
                   </div>
                 )}
 
                 <div className="flex items-center gap-2">
                   <button
                     onClick={handleCopyToken}
-                    className="flex-1 bg-white/5 hover:bg-white/10 border border-white/10 text-slate-300 py-2.5 px-3 rounded-xl text-[9px] font-bold text-center cursor-pointer transition-all uppercase"
+                    className="flex-1 bg-emerald-600/10 hover:bg-emerald-600/20 border border-emerald-500/20 text-emerald-400 py-2.5 px-3 rounded-xl text-[9px] font-bold text-center cursor-pointer transition-all uppercase"
                   >
-                    {copied ? '✓ COPIED TOKEN payload' : 'Copy Hash string'}
+                    {copied ? '✓ Copied Ticket Details' : 'Copy Ticket Code'}
                   </button>
                   <button
                     onClick={() => onRequestRefund(selectedPass.id)}
                     className="bg-rose-500/10 hover:bg-rose-500/20 hover:text-white border border-rose-500/20 text-rose-400 py-2.5 px-3 rounded-xl text-[9px] font-bold cursor-pointer transition-all uppercase shrink-0"
                   >
-                    Request refund
+                    Cancel Ticket & Refund
                   </button>
                 </div>
               </div>
 
             </div>
           ) : (
-            <div className="bg-[#0c0d15]/60 rounded-3xl p-8 border border-dashed border-white/10 text-center space-y-4 py-16">
-              <div className="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center text-slate-400 mx-auto shadow-sm">
-                <Cpu className="w-6 h-6 animate-pulse text-blue-400" />
+            <div className="bg-[#0b0c0b]/60 rounded-3xl p-8 border border-dashed border-emerald-500/10 text-center space-y-4 py-16">
+              <div className="w-12 h-12 bg-emerald-500/10 rounded-2xl flex items-center justify-center text-emerald-400 mx-auto shadow-sm">
+                <Ticket className="w-6 h-6 animate-pulse" />
               </div>
               <div className="max-w-xs mx-auto space-y-1.5">
-                <h4 className="font-bold text-white font-display text-sm uppercase tracking-wide">No Live Ticket Selected</h4>
+                <h4 className="font-bold text-white font-display text-sm uppercase tracking-wide">No Ticket Selected</h4>
                 <p className="text-xs text-slate-400 leading-relaxed font-sans leading-[1.6]">
-                  Click on any of your active tickets in the left panel to load the dynamic 10-second refreshing entrance pass!
+                  Click on any of your active tickets in the left list to load your real-time secure entry QR code.
                 </p>
               </div>
             </div>

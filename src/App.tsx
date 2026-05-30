@@ -26,8 +26,8 @@ import { Shield, Sparkles, User as UserIcon, Building2, Ticket, Search, ShieldCh
 
 export default function App() {
   
-  // Rotating security seconds ticker (10s intervals)
-  const [rotatingSeconds, setRotatingSeconds] = useState<number>(10);
+  // Rotating security seconds ticker (30s intervals)
+  const [rotatingSeconds, setRotatingSeconds] = useState<number>(30);
 
   // Core full-stack state tables
   const [users, setUsers] = useState<User[]>(MOCK_USERS);
@@ -58,7 +58,7 @@ export default function App() {
       userId: 'user-admin',
       userEmail: 'admin@qrypt.pk',
       action: 'SYSTEM_BOOT',
-      details: 'Qrypt full-stack cryptographic symmetric rotating keys core activated. Multi-tenant architecture running live.',
+      details: 'Gate Pass Manager successfully started. Security event monitors online.',
       ipAddress: '202.141.22.45',
       createdAt: '2026-05-30T00:00:01Z'
     }
@@ -73,12 +73,12 @@ export default function App() {
   const [checkoutTier, setCheckoutTier] = useState<TicketTier | null>(null);
   const [checkoutQuantity, setCheckoutQuantity] = useState<number>(1);
 
-  // Central 10-second ticker synchronization
+  // Central 30-second ticker synchronization
   useEffect(() => {
     const timer = setInterval(() => {
       setRotatingSeconds((prev) => {
         if (prev <= 1) {
-          return 10;
+          return 30;
         }
         return prev - 1;
       });
@@ -365,7 +365,7 @@ export default function App() {
   const selectedEventOrg = selectedEvent ? organizations.find(o => o.id === selectedEvent.organizerId) : null;
 
   return (
-    <div className="min-h-screen bg-[#05060B] text-slate-100 flex flex-col font-sans select-none antialiased relative">
+    <div className="min-h-screen bg-[#0A0D0A] text-slate-100 flex flex-col font-sans select-none antialiased relative">
       <div className="absolute top-20 left-1/4 w-[500px] h-[500px] sleek-glow opacity-60"></div>
       <div className="absolute bottom-20 right-1/4 w-[400px] h-[400px] sleek-glow opacity-40"></div>
       
@@ -378,7 +378,7 @@ export default function App() {
       />
 
       {/* Main SaaS App Head Navbar */}
-      <header className="bg-[#05060B]/85 backdrop-blur-md border-b border-white/5 py-4 px-6 sticky top-14 z-40 shadow-xl">
+      <header className="bg-[#0A0D0A]/85 backdrop-blur-md border-b border-emerald-500/10 py-4 px-6 sticky top-14 z-40 shadow-xl">
         <div className="max-w-7xl mx-auto flex items-center justify-between">
           
           {/* Logo brand */}
@@ -386,12 +386,12 @@ export default function App() {
             onClick={() => { setCurrentTab('marketplace'); setSelectedEventId(null); }}
             className="flex items-center gap-2.5 cursor-pointer group"
           >
-            <div className="w-8.5 h-8.5 bg-blue-600 rounded-lg flex items-center justify-center font-bold text-lg text-white shadow-md shadow-blue-500/20 group-hover:bg-blue-500 transition-all">
+            <div className="w-8.5 h-8.5 bg-emerald-600 rounded-lg flex items-center justify-center font-bold text-lg text-white shadow-md shadow-emerald-500/20 group-hover:bg-emerald-500 transition-all">
               <span className="font-display tracking-tight block uppercase">Q</span>
             </div>
             <div>
               <strong className="text-white font-display font-extrabold tracking-widest text-lg block uppercase">Qrypt</strong>
-              <span className="text-[9px] text-blue-400 font-mono block -mt-1 uppercase tracking-tight font-semibold">Pakistan Safe Passages</span>
+              <span className="text-[9px] text-emerald-400 font-mono block -mt-1 uppercase tracking-tight font-semibold">Pakistan Secure Passes</span>
             </div>
           </div>
 
@@ -401,7 +401,7 @@ export default function App() {
               onClick={() => { setCurrentTab('marketplace'); setSelectedEventId(null); }}
               className={`px-4 py-2 rounded-full text-xs font-semibold cursor-pointer transition-all ${
                 currentTab === 'marketplace' || currentTab === 'details'
-                  ? 'bg-white text-black font-bold shadow-md'
+                  ? 'bg-emerald-600 text-white font-bold shadow-md'
                   : 'text-slate-400 hover:text-white'
               }`}
             >
@@ -413,12 +413,12 @@ export default function App() {
                 onClick={() => setCurrentTab('dashboard')}
                 className={`px-4 py-2 rounded-full text-xs font-semibold cursor-pointer transition-all flex items-center gap-1.5 ${
                   currentTab === 'dashboard'
-                    ? 'bg-white text-black font-bold shadow-md'
+                    ? 'bg-emerald-600 text-white font-bold shadow-md'
                     : 'text-slate-400 hover:text-white'
                 }`}
               >
-                <Ticket className="w-3.5 h-3.5 text-blue-500" />
-                <span>My Safe ({purchasedPasses.filter(p => p.status === 'ACTIVE').length})</span>
+                <Ticket className="w-3.5 h-3.5 text-emerald-300" />
+                <span>My Tickets ({purchasedPasses.filter(p => p.status === 'ACTIVE').length})</span>
               </button>
             )}
 
@@ -427,12 +427,12 @@ export default function App() {
                 onClick={() => setCurrentTab('organizer')}
                 className={`px-4 py-2 rounded-full text-xs font-semibold cursor-pointer transition-all flex items-center gap-1.5 ${
                   currentTab === 'organizer'
-                    ? 'bg-white text-black font-bold shadow-md'
+                    ? 'bg-emerald-600 text-white font-bold shadow-md'
                     : 'text-slate-400 hover:text-white'
                 }`}
               >
-                <Building2 className="w-3.5 h-3.5 text-amber-500" />
-                <span>Curator Console</span>
+                <Building2 className="w-3.5 h-3.5 text-amber-400" />
+                <span>Organizer Dashboard</span>
               </button>
             )}
 
@@ -441,7 +441,7 @@ export default function App() {
                 onClick={() => setCurrentTab('admin')}
                 className={`px-4 py-2 rounded-full text-xs font-semibold cursor-pointer transition-all flex items-center gap-1.5 ${
                   currentTab === 'admin'
-                    ? 'bg-white text-black font-bold shadow-md'
+                    ? 'bg-emerald-600 text-white font-bold shadow-md'
                     : 'text-slate-400 hover:text-white'
                 }`}
               >
@@ -546,11 +546,11 @@ export default function App() {
       )}
 
       {/* Footer information bar */}
-      <footer className="bg-[#070913] text-slate-400 border-t border-white/5 mt-auto py-10 px-6 text-center select-none relative z-10">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-mono">
+      <footer className="bg-[#060806] text-slate-400 border-t border-emerald-500/10 mt-auto py-10 px-6 text-center select-none relative z-10">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-sans">
           <p>© 2026 Qrypt Technologies (Pvt) Ltd. Karachi, Pakistan. All rights reserved.</p>
           <div className="flex gap-4">
-            <span className="text-slate-500">Secure Symmetric HMAC-SHA256 refreshed entries core • OWASP Compliant</span>
+            <span className="text-slate-500">Secure Dynamic QR Attendance System • SOC2 Compliance Guided</span>
           </div>
         </div>
       </footer>

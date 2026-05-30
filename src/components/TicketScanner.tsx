@@ -210,11 +210,11 @@ export default function TicketScanner({
     <div className="space-y-8 animate-fade-in pb-16 max-w-4xl mx-auto select-none relative z-10 text-slate-200">
       
       {/* Title Nav Gate */}
-      <div className="flex items-center justify-between border-b border-white/5 pb-4">
+      <div className="flex items-center justify-between border-b border-emerald-500/10 pb-4">
         <div>
-          <span className="text-[10px] text-emerald-450 font-extrabold font-mono uppercase block tracking-wider">ENTRY VERIFICATION SYSTEM</span>
+          <span className="text-[10px] text-emerald-400 font-extrabold font-mono uppercase block tracking-wider font-semibold">ENTRY VERIFICATION GATEWAY</span>
           <h2 className="text-xl sm:text-2xl font-extrabold text-white font-display uppercase tracking-tight">
-            Gate Checker Terminal
+            Digital Pass Ticket Scanner
           </h2>
         </div>
 
@@ -227,9 +227,9 @@ export default function TicketScanner({
       </div>
 
       {/* Target event select */}
-      <div className="bg-[#0F111A] border rounded-3xl p-5 border-white/5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-[#0b0c0b] border rounded-3xl p-5 border-emerald-500/10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="space-y-1">
-          <label className="text-[10px] text-slate-500 font-mono font-bold block uppercase tracking-widest">Scanning Target Event</label>
+          <label className="text-[10px] text-slate-500 font-mono font-bold block uppercase tracking-widest">Active Verification Event</label>
           <select
             value={selectedEventId}
             onChange={(e) => setSelectedEventId(e.target.value)}
@@ -242,18 +242,17 @@ export default function TicketScanner({
         </div>
 
         {activeEvent && (
-          <div className="text-right text-xs bg-black/25 p-2.5 rounded-xl border border-white/5 font-mono flex items-center gap-1.5 text-slate-400 uppercase tracking-wide">
-            <Radio className="w-3.5 h-3.5 text-blue-500 animate-pulse" />
-            <span>Assigned: {activeEvent.city} • Active Security Mode</span>
+          <div className="text-right text-xs bg-black/25 p-2.5 rounded-xl border border-emerald-500/10 font-mono flex items-center gap-1.5 text-slate-400 uppercase tracking-wide">
+            <Radio className="w-3.5 h-3.5 text-emerald-500 animate-pulse" />
+            <span>Assigned Location: {activeEvent.city} • Active Security</span>
           </div>
         )}
       </div>
 
       {/* Main Split: Left scanner view, right outcome */}
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-        
-        {/* COLUMN 1: INTERACTIVE SCAN VIEWPORT */}
-        <div className="bg-[#0c0d15] text-white rounded-[32px] p-6 border border-white/10 shadow-2xl space-y-6 flex flex-col items-center">
+             {/* COLUMN 1: INTERACTIVE SCAN VIEWPORT */}
+        <div className="bg-[#0b0c0b] text-white rounded-[32px] p-6 border border-emerald-500/10 shadow-2xl space-y-6 flex flex-col items-center">
           
           <div className="w-full flex items-center justify-between border-b border-white/5 pb-3">
             <span className="text-[10px] font-mono font-extrabold text-slate-500">CAMERA GATE VIEWPORT</span>
@@ -266,8 +265,8 @@ export default function TicketScanner({
           {/* Visual camera square grid frame */}
           <div className="relative aspect-square w-full bg-black/40 rounded-2xl overflow-hidden flex flex-col justify-between p-4 border border-white/5">
             
-            {/* Holographic LASER crosshair */}
-            <div className="absolute inset-x-8 top-1/2 -translate-y-1/2 h-0.5 bg-red-500/30 shadow-glow animate-bounce pointer-events-none z-20"></div>
+            {/* Holographic scanner indicator */}
+            <div className="absolute inset-x-8 top-1/2 -translate-y-1/2 h-0.5 bg-emerald-500/40 shadow-glow animate-bounce pointer-events-none z-20"></div>
 
             {/* Simulated viewfinder corners */}
             <div className="absolute top-4 left-4 w-6 h-6 border-t-2 border-l-2 border-slate-600"></div>
@@ -287,20 +286,20 @@ export default function TicketScanner({
             ) : (
               <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center space-y-3 z-10 selection-none">
                 <div className="w-12 h-12 bg-black/60 rounded-full flex items-center justify-center border border-white/10">
-                  <Camera className="w-5 h-5 text-slate-550" />
+                  <Camera className="w-5 h-5 text-slate-500" />
                 </div>
                 <div className="max-w-xs space-y-1">
-                  <h4 className="font-semibold text-[10px] uppercase font-mono tracking-wider text-slate-300">Webcam scan port closed</h4>
-                  <p className="text-[10px] text-slate-550 leading-relaxed font-sans">
-                    Enable webcam feed or use the instant bypass shortcuts below to verify token schemas.
+                  <h4 className="font-semibold text-[10px] uppercase font-mono tracking-wider text-slate-300">Camera feed closed</h4>
+                  <p className="text-[10px] text-slate-400 leading-relaxed font-sans">
+                    Enable webcam feed or use the simulation buttons below to test entry validation.
                   </p>
                 </div>
               </div>
             )}
 
             {cameraActive && (
-              <span className="absolute bottom-3 left-3 bg-red-600/90 text-white text-[9px] uppercase font-mono px-2 py-0.5 rounded font-extrabold tracking-wide">
-                ● LIVE REC FEED
+              <span className="absolute bottom-3 left-3 bg-[#102a1d] text-emerald-400 text-[9px] uppercase font-mono px-2 py-0.5 border border-emerald-500/20 rounded font-extrabold tracking-wide">
+                ● LIVE SCAN FEED
               </span>
             )}
           </div>
@@ -320,59 +319,59 @@ export default function TicketScanner({
                 <button
                   type="button"
                   onClick={startCamera}
-                  className="flex-1 bg-blue-600 hover:bg-blue-500 text-white py-2.5 rounded-full text-xs font-mono font-bold cursor-pointer text-center uppercase tracking-wider transition-all shadow-lg"
+                  className="flex-1 bg-emerald-600 hover:bg-emerald-500 text-white py-2.5 rounded-full text-xs font-mono font-bold cursor-pointer text-center uppercase tracking-wider transition-all shadow-lg"
                 >
                   Start Live Camera Scan
                 </button>
               )}
             </div>
 
-            {cameraError && <p className="text-[10.5px] text-yellow-550 text-center font-medium font-mono">{cameraError}</p>}
+            {cameraError && <p className="text-[10.5px] text-yellow-500 text-center font-medium font-mono">{cameraError}</p>}
 
             {/* Quick Emulator Shortcuts */}
             <div className="border-t border-white/5 pt-4 space-y-2">
-              <span className="text-[9px] font-mono text-slate-500 block uppercase tracking-wider font-semibold">Validation Emulation Panel</span>
+              <span className="text-[9px] font-mono text-slate-500 block uppercase tracking-wider font-semibold">Simulation & Testing Tools</span>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                 <button
                   type="button"
                   onClick={handleQuickScanActive}
-                  className="bg-emerald-550/10 hover:bg-emerald-550/20 text-emerald-405 border border-emerald-500/20 py-2.5 rounded-full text-[9px] font-bold cursor-pointer transition uppercase font-mono tracking-wider text-center"
+                  className="bg-emerald-550/10 hover:bg-emerald-550/20 text-emerald-400 border border-emerald-500/20 py-2.5 rounded-full text-[9px] font-bold cursor-pointer transition uppercase font-mono tracking-wider text-center"
                 >
-                  Scan Active
+                  Scan Valid QR
                 </button>
                 <button
                   type="button"
                   onClick={handleQuickScanExpired}
-                  className="bg-amber-550/10 hover:bg-amber-550/20 text-amber-405 border border-amber-500/20 py-2.5 rounded-full text-[9px] font-bold cursor-pointer transition uppercase font-mono tracking-wider text-center"
+                  className="bg-amber-550/10 hover:bg-amber-550/20 text-amber-400 border border-amber-500/20 py-2.5 rounded-full text-[9px] font-bold cursor-pointer transition uppercase font-mono tracking-wider text-center"
                 >
-                  Scan Expired
+                  Scan Expired QR
                 </button>
                 <button
                   type="button"
                   onClick={handleQuickScanDuplicate}
-                  className="bg-rose-550/10 hover:bg-rose-550/20 text-rose-450 border border-rose-500/20 py-2.5 rounded-full text-[9px] font-bold cursor-pointer transition uppercase font-mono tracking-wider text-center"
+                  className="bg-rose-550/10 hover:bg-rose-550/20 text-rose-400 border border-rose-500/20 py-2.5 rounded-full text-[9px] font-bold cursor-pointer transition uppercase font-mono tracking-wider text-center"
                 >
-                  Duplicate Hash
+                  Scan Used QR
                 </button>
               </div>
             </div>
 
             {/* Copy paste manual field */}
             <div className="space-y-1.5 pt-1">
-              <span className="text-[9px] font-mono text-slate-550 block uppercase tracking-wider font-semibold">Manual crypt token input</span>
+              <span className="text-[9px] font-mono text-slate-550 block uppercase tracking-wider font-semibold">Manual Ticket Code Input</span>
               <div className="flex gap-2">
                 <input
                   type="text"
-                  placeholder="Paste raw 'qrypt_v1...' token string..."
+                  placeholder="Paste raw 'qrypt_v1...' ticket string..."
                   value={manualToken}
                   onChange={(e) => setManualToken(e.target.value)}
-                  className="w-full bg-black/30 border border-white/10 rounded-[10px] py-2 px-3.5 text-[10px] font-mono text-slate-300 focus:outline-none focus:ring-1 focus:ring-blue-500"
+                  className="w-full bg-black/30 border border-white/10 rounded-[10px] py-2 px-3.5 text-[10px] font-mono text-slate-300 focus:outline-none focus:ring-1 focus:ring-emerald-500"
                 />
                 <button
                   onClick={() => handleVerifyTokenString(manualToken)}
-                  className="bg-white hover:bg-slate-100 text-[#07080F] px-4 py-2 rounded-[10px] text-[10px] font-mono font-extrabold uppercase tracking-wider cursor-pointer shrink-0 transition-colors"
+                  className="bg-emerald-600 hover:bg-emerald-500 text-white px-4 py-2 rounded-[10px] text-[10px] font-mono font-extrabold uppercase tracking-wider cursor-pointer shrink-0 transition-colors"
                 >
-                  Audit
+                  Verify
                 </button>
               </div>
             </div>
@@ -386,11 +385,11 @@ export default function TicketScanner({
           
           {/* Main big block card */}
           {scanResult.status === 'IDLE' ? (
-            <div className="bg-[#0F111A] rounded-[32px] p-8 border border-white/5 text-center py-20">
-              <Camera className="w-10 h-10 text-slate-700 mx-auto" />
-              <h4 className="font-extrabold text-slate-355 text-xs mt-3.5 uppercase font-mono tracking-widest">Awaiting Ticket Scan</h4>
+            <div className="bg-[#0b0c0b] rounded-[32px] p-8 border border-white/5 text-center py-20">
+              <Camera className="w-10 h-10 text-slate-600 mx-auto" />
+              <h4 className="font-extrabold text-slate-400 text-xs mt-3.5 uppercase font-mono tracking-widest">Awaiting Ticket Scan</h4>
               <p className="text-[11px] text-slate-500 leading-relaxed font-sans mt-2 max-w-[280px] mx-auto">
-                Point camera at a dynamic QR code or click the emulator actions to run live cryptographic verification.
+                Point the camera at an active ticket QR code or try the simulation options to evaluate verification instantly.
               </p>
             </div>
           ) : (
@@ -403,13 +402,13 @@ export default function TicketScanner({
               {/* Checkmark or Cross icons */}
               <div className="flex flex-col items-center">
                 {scanResult.status === 'GREEN' ? (
-                  <CheckCircle2 className="w-14 h-14 text-emerald-400 animate-scale-up" />
+                  <CheckCircle2 className="w-14 h-14 text-emerald-400" />
                 ) : (
                   <XCircle className="w-14 h-14 text-rose-400 animate-pulse" />
                 )}
                 
                 <h3 className={`text-xl sm:text-2xl font-black font-display uppercase tracking-wider mt-4.5 ${
-                  scanResult.status === 'GREEN' ? 'text-emerald-350' : 'text-rose-350'
+                  scanResult.status === 'GREEN' ? 'text-emerald-400' : 'text-rose-400'
                 }`}>
                   {scanResult.status === 'GREEN' ? 'ACCESS GRANTED' : 'ACCESS DENIED'}
                 </h3>
@@ -421,7 +420,7 @@ export default function TicketScanner({
               {/* Attendee Profile Details on grant */}
               {scanResult.status === 'GREEN' && (
                 <div className="bg-black/35 border border-emerald-500/15 rounded-2xl p-5 text-left space-y-3.5 shadow-sm">
-                  <span className="text-[9px] font-mono font-bold text-slate-500 uppercase tracking-widest block">AUDITED ATTENDEE DATA</span>
+                  <span className="text-[9px] font-mono font-bold text-slate-500 uppercase tracking-widest block font-sans">ATTENDEE ENTRY INFO</span>
                   
                   <div className="flex items-center gap-3">
                     <div className="w-10 h-10 bg-emerald-500/10 rounded-full flex items-center justify-center font-bold text-emerald-400 border border-emerald-500/20">
@@ -435,11 +434,11 @@ export default function TicketScanner({
 
                   <div className="grid grid-cols-2 gap-2 text-[10px] pt-3.5 border-t border-white/5 font-mono text-slate-400">
                     <div>
-                      <span className="text-slate-550 block">TICKET STATUS</span>
-                      <strong className="text-emerald-420 block mt-0.5">✓ SECURE PASS</strong>
+                      <span className="text-slate-500 block">TICKET STATUS</span>
+                      <strong className="text-[#10b981] block mt-0.5">✓ VALID PASS</strong>
                     </div>
                     <div>
-                      <span className="text-slate-550 block">TICKET ID</span>
+                      <span className="text-slate-500 block">TICKET ID</span>
                       <strong className="text-slate-200 block truncate mt-0.5">#{scanResult.uniqueCode?.slice(-6).toUpperCase()}</strong>
                     </div>
                   </div>
@@ -448,22 +447,22 @@ export default function TicketScanner({
 
               {/* Technical breakdown console */}
               <div className="bg-black/45 text-slate-300 p-4 rounded-2xl text-left font-mono text-[9px] leading-relaxed select-text shadow-sm border border-white/5">
-                <span className="text-[8.5px] text-slate-500 block border-b border-white/5 pb-1 uppercase tracking-wider font-extrabold">Cryptographic Checker Diagnostic</span>
-                <p className="mt-2 text-yellow-405 leading-relaxed">{scanResult.diagnostics}</p>
-                <p className="text-[8.5px] text-slate-500 mt-1.5">Audit Log Timestamp: {new Date().toLocaleTimeString()} (PST Zone)</p>
+                <span className="text-[8.5px] text-slate-500 block border-b border-white/5 pb-1 uppercase tracking-wider font-extrabold">Security Diagnostic Details</span>
+                <p className="mt-2 text-emerald-405 leading-relaxed">{scanResult.diagnostics}</p>
+                <p className="text-[8.5px] text-slate-500 mt-1.5">Check-in Timestamp: {new Date().toLocaleTimeString()} PST</p>
               </div>
 
             </div>
           )}
 
           {/* Quick instructions reminder */}
-          <div className="bg-[#0F111A] border border-white/5 rounded-2xl p-4.5 space-y-2 text-xs">
+          <div className="bg-[#0b0c0b] border border-emerald-500/10 rounded-2xl p-4.5 space-y-2 text-xs">
             <span className="font-bold text-white flex items-center gap-1.5 leading-snug font-display uppercase tracking-wider text-[11px]">
-              <UserCheck className="w-4 h-4 text-emerald-450 shrink-0" />
-              <span>How it validates:</span>
+              <UserCheck className="w-4 h-4 text-emerald-400 shrink-0" />
+              <span>ENTRY VERIFICATION METHOD:</span>
             </span>
             <p className="text-slate-400 text-xs leading-relaxed leading-[1.6]">
-              When scanned, Qrypt's algorithmic gates decompress the QR payload, match against the rotating crypt core indices corresponding to expiration windows, verify the cryptographic certificate signature, and block entry if duplicate hashes are indexed.
+              When scanned, the QR code is checked against the event's current rotating safety window, verifying ticket signatures instantly to block duplicate check-in attempts.
             </p>
           </div>
 

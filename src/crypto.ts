@@ -14,8 +14,8 @@ const MASTER_SALT = 'QRYPT_SECURE_EVENT_ACCESS_SALT_2026';
  * Allows validating tokens generated in the previous interval by checking adjacent periods.
  */
 function getRotatingSecret(epochSeconds: number): string {
-  // Rotate the key code every 10 seconds.
-  const intervalIndex = Math.floor(epochSeconds / 10);
+  // Rotate the key code every 30 seconds.
+  const intervalIndex = Math.floor(epochSeconds / 30);
   // Simple deterministic hash of the interval + salt to produce a rotating secret
   const combined = `${intervalIndex}-${MASTER_SALT}`;
   return simpleHash(combined);
@@ -58,8 +58,8 @@ export function generateDynamicQRToken(passId: string, userId: string, eventId: 
   const nowMs = Date.now();
   const nowSeconds = Math.floor(nowMs / 1000);
   
-  // Expiry is strictly 10 seconds from now
-  const expiry = nowSeconds + 10;
+  // Expiry is strictly 30 seconds from now
+  const expiry = nowSeconds + 30;
   
   const payload = {
     passId,
@@ -67,7 +67,7 @@ export function generateDynamicQRToken(passId: string, userId: string, eventId: 
     eventId,
     timestamp: nowSeconds,
     expiry,
-    rotationIndex: Math.floor(nowSeconds / 10)
+    rotationIndex: Math.floor(nowSeconds / 30)
   };
 
   // Create signature using the secret for this exact timestamp
@@ -83,7 +83,7 @@ export function generateDynamicQRToken(passId: string, userId: string, eventId: 
     tokenString,
     payload,
     signature,
-    expiresInSeconds: 10 - (nowSeconds % 10) // remaining seconds in current rotation
+    expiresInSeconds: 30 - (nowSeconds % 30) // remaining seconds in current rotation
   };
 }
 
@@ -113,7 +113,7 @@ export function verifyDynamicQRToken(
       return {
         isValid: false,
         code: 'MALFORMED',
-        message: 'Invalid token structure. Not a standard Qrypt Pass.'
+        message: 'Invalid ticket format. Please present a valid ticket QR code.'
       };
     }
 
@@ -122,7 +122,7 @@ export function verifyDynamicQRToken(
       return {
         isValid: false,
         code: 'MALFORMED',
-        message: 'Token components are incomplete or corrupted.'
+        message: 'This ticket code appears to be incomplete or corrupted.'
       };
     }
 
@@ -131,7 +131,7 @@ export function verifyDynamicQRToken(
       return {
         isValid: false,
         code: 'MALFORMED',
-        message: 'Unsupported signature header version.'
+        message: 'Unsupported ticket version.'
       };
     }
 
@@ -143,7 +143,7 @@ export function verifyDynamicQRToken(
       return {
         isValid: false,
         code: 'MALFORMED',
-        message: 'Payload decompression failed.'
+        message: 'Unable to read the ticket data.'
       };
     }
 
@@ -154,7 +154,7 @@ export function verifyDynamicQRToken(
       return {
         isValid: false,
         code: 'MALFORMED',
-        message: 'Mandatory token claims (passId, userId, eventId) are missing.'
+        message: 'Required ticket information is missing.'
       };
     }
 
@@ -172,7 +172,7 @@ export function verifyDynamicQRToken(
       return {
         isValid: false,
         code: 'ALREADY_USED',
-        message: 'Ticket has already been scanned. Duplicate entry blocked!'
+        message: 'This ticket has already been scanned. Entry is not allowed.'
       };
     }
 
@@ -181,11 +181,10 @@ export function verifyDynamicQRToken(
     const gracePeriod = 3; 
     
     if (currentSeconds > expiry + gracePeriod) {
-      const secondsOver = currentSeconds - expiry;
       return {
         isValid: false,
         code: 'EXPIRED',
-        message: `Pass expired ${secondsOver} seconds ago. Active rotation block has completed.`
+        message: 'This key has expired. Please refresh the QR code on your screen.'
       };
     }
 
@@ -211,14 +210,14 @@ export function verifyDynamicQRToken(
       return {
         isValid: false,
         code: 'INVALID_SIGNATURE',
-        message: 'Cryptographic core verification failed. Potential screenshot, spoofing, or tampering.'
+        message: 'Ticket verification failed. Please show the live active QR code in your app.'
       };
     }
 
     return {
       isValid: true,
       code: 'SUCCESS',
-      message: 'Access Granted. Valid token signature registered.',
+      message: 'Access Granted. Ticket verified successfully.',
       payload: { passId, userId, eventId, timestamp, expiry }
     };
   } catch (error: any) {
