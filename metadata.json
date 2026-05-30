@@ -1,0 +1,6 @@
+{
+  "name": "Qrypt",
+  "description": "Secure Event Access Powered By Dynamic QR Passes",
+  "requestFramePermissions": ["camera"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
